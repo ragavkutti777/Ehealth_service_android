@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "795225458007",
+    "firebase_url": "https://ehealthservice-e1a1a.firebaseio.com",
+    "project_id": "ehealthservice-e1a1a",
+    "storage_bucket": "ehealthservice-e1a1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795225458007:android:3afb193cec637217",
+        "android_client_info": {
+          "package_name": "com.example.vignesh.ehealthservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795225458007-2vqoj63gs3h8rin800mba6k8i7h6bm8g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vignesh.ehealthservice",
+            "certificate_hash": "285746890cfeb2fdc94bddd39a397fa867cfbc8b"
+          }
+        },
+        {
+          "client_id": "795225458007-b0bdt66v9kcm55iiukjergl8rqmlaol0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_c7kPQg7rwUJCaJQc2xEIFrLd6zNIj88"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795225458007-b0bdt66v9kcm55iiukjergl8rqmlaol0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
