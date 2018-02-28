@@ -1,5 +1,7 @@
 package com.example.vignesh.ehealthservice;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://192.168.1.2:5000");
+            mSocket = IO.socket("https://ehealthservice.herokuapp.com/");
         } catch (URISyntaxException e) {e.printStackTrace();}
     }
 
@@ -51,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         mSocket.on("rk",notification1);
         mSocket.on("alert_m",notification2);
     }
-
-
 
     Emitter.Listener notification=new Emitter.Listener() {
         @Override
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         e.printStackTrace();
                     }
-
                 }
             });
         }
@@ -90,17 +89,16 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
+                    try
+                    {
                         JSONObject jsonObject= (JSONObject) args[0];
                         String message=jsonObject.getString("message");
                         textView.setText(new StringBuilder("Heart rate value "+message+"bpm"));
-
                     }
                     catch (Exception e)
                     {
                         e.printStackTrace();
                     }
-
                 }
             });
         }
@@ -137,19 +135,40 @@ public class MainActivity extends AppCompatActivity {
 
     public void alert(View v)
     {
-        try
-        {
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("message","alert");
-            mSocket.emit("alert",jsonObject.toString());
-            Toast.makeText(getApplicationContext(),"Alert Sent",Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, "https://ehealthservice.herokuapp.com/alert", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.equals("done"))
+                {
+                    Toast.makeText(getApplicationContext(),"Alert sent",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Something went wrong.. Try again",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error instanceof TimeoutError||error instanceof NoConnectionError)
+                {
+                    Toast.makeText(getApplicationContext(),"Check your network connectivity",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Something went wrong.. Try again",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        RequestQueue requestQueue=newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
+    public void open_profile(View v)
+    {
+        profile profile=new profile();
+        profile.show(getSupportFragmentManager(),"Profile");
+    }
     @Override
     protected void onResume() {
         super.onResume();
