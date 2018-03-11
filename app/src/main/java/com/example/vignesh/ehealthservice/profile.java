@@ -65,15 +65,11 @@ public class profile extends DialogFragment {
                 textView2.setText(dataSnapshot.child("phone").getValue().toString());
                 textView3.setText(dataSnapshot.child("age").getValue().toString());
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
         return  v;
     }
-
 }
