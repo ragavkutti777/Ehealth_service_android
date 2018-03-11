@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         if(mAuth.getCurrentUser()!=null)
         {
             finish();
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),choose_host.class));
         }
     }
 
@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                startActivity(new Intent(getApplicationContext(),choose_host.class));
                                 finish();
                             }
                             else
